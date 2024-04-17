@@ -22,10 +22,10 @@ describe('TextAnalyzerStateService', () => {
   });
 
   it('should analyze text offline mode positive scenario'), () => {
-    const expectedOutput = { o: 1, a: 2 };
     const text = 'mostafa';
     const type = AnalysisType.Vowels;
     const isOnlineMode = false;
+    const expectedOutput = { o: 1, a: 2 };
 
     service.analyzeText(text, type, isOnlineMode).subscribe(result => expect(result).toEqual(expectedOutput));
   }
@@ -34,10 +34,10 @@ describe('TextAnalyzerStateService', () => {
     [HttpTestingController, TextAnalyzerStateService],
     (httpMock: HttpTestingController, service: TextAnalyzerStateService) => {
     
-    const expectedOutput = { o: 1, a: 2 };
     const text = 'mostafa';
     const type = AnalysisType.Vowels;
     const isOnlineMode = true;
+    const expectedOutput = { o: 1, a: 2 };
 
 
     service.analyzeText(text, type, isOnlineMode).subscribe(data => {
