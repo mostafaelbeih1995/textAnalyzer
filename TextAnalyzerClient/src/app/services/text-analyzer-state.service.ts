@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AnalysisType } from '../enums/AnalysisType';
@@ -12,8 +12,7 @@ import {TypeRelatedCharacter} from '../enums/TypeRelatedCharacter';
 export class TextAnalyzerStateService {
 
   private onlineMode: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  private http = inject(HttpClient);
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getState(): Observable<boolean> {
     return this.onlineMode.asObservable();
@@ -47,7 +46,6 @@ export class TextAnalyzerStateService {
         analysisMap.set(char, count);
       }
     });
-    console.log(Object.fromEntries(analysisMap));
     return Object.fromEntries(analysisMap);
   }
 }

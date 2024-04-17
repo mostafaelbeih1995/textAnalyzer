@@ -1,22 +1,24 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {HttpClient} from "@angular/common/http";
 import { TextAnalyzerStateService } from '../../services/text-analyzer-state.service';
+import { AnalysisType } from '../../enums/AnalysisType';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-text-analyzer',
   templateUrl: './text-analyzer.component.html',
   styleUrl: './text-analyzer.component.css'
 })
-export class TextAnalyzerComponent implements OnInit{
+export class TextAnalyzerComponent implements OnInit, OnDestroy{
   state: boolean = true;
   textForm!: FormGroup;
   analysisList: any[] = [];
-  private textAnalyzerService = inject(TextAnalyzerStateService);
-  private fb = inject(FormBuilder);
-  private http = inject(HttpClient);
-
+  type = AnalysisType;
+  stateSubscriber!: Subscription;
   
+  constructor(private textAnalyzerService: TextAnalyzerStateService, private fb: FormBuilder, private http: HttpClient){
+  }
   ngOnInit(): void {
     this.getState();
     this.createForm();
@@ -25,7 +27,7 @@ export class TextAnalyzerComponent implements OnInit{
   createForm(): void {
     this.textForm = this.fb.group({
       text: [null, [Validators.required]],
-      type: ['ALLLETTERS', [Validators.required]],
+      type: [this.type.AllLetters, [Validators.required]],
     })
   }
 
@@ -41,11 +43,11 @@ export class TextAnalyzerComponent implements OnInit{
       return;
     }
     this.textAnalyzerService.analyzeText(this.textForm.value['text'], this.textForm.value['type'], this.getState()).subscribe(result => {
-      if(result && Object.keys(result).length === 0)
-        console.log('error');
-        //handle error
-       else
         this.analysisList.push(result);
     });;
+  }
+
+  ngOnDestroy() {
+    this.stateSubscriber.unsubscribe();
   }
 }

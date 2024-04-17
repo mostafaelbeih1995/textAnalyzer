@@ -1,4 +1,5 @@
 export enum AnalysisType {
     Vowels = 'VOWELS',
-    Consonants = 'CONSONANTS'
+    Consonants = 'CONSONANTS',
+    AllLetters = 'ALLLETTERS',
   }
