@@ -1,70 +1,28 @@
 package com.Dedalus.TextAnalyzer.service;
 
+import com.Dedalus.TextAnalyzer.model.enums.AnalysisMode;
+import com.Dedalus.TextAnalyzer.model.enums.ModeValidCharacters;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Service
 public class TextAnalyzerService {
+    public Map<Character, Integer> analyzeText(String text, AnalysisMode type){
 
-    public void analyzeText(String text, String type) {
+        Map<Character, Integer> result = new LinkedHashMap<>();
+        String charactersToCheck = type.getType().equals("Vowels") ? ModeValidCharacters.VOWELS.getValidCharacters() :
+                                    type.getType().equals("Consonants") ? ModeValidCharacters.CONSONANTS.getValidCharacters() :
+                                            ModeValidCharacters.ALLLETTERS.getValidCharacters();
 
-        String input = "";
-        int numA = 0;
-        int numE = 0;
-        int numI = 0;
-        int numO = 0;
-        int numU = 0;
-        if (type.equals("vowels")) {
-            input = text;
-            char[] chars = input.toCharArray();
-            for (int i = 0; i < chars.length; i++) {
-                System.out.println(chars[i]);
-                if (chars[i] == 'a' || chars[i] == 'A')
-                    numA++;
-                if (chars[i] == 'e' || chars[i] == 'E')
-                    numE++;
-                if (chars[i] == 'i' || chars[i] == 'I')
-                    numI++;
-                if (chars[i] == 'o' || chars[i] == 'O')
-                    numO++;
-                if (chars[i] == 'u' || chars[i] == 'U')
-                    numU++;
+        text = text.toLowerCase();
+        for(char c: text.toCharArray()){
+            if(charactersToCheck.indexOf(c) != -1){
+                result.put(c, result.getOrDefault(c, 0) + 1);
             }
-            System.out.println("Letter 'A' appears " + numA + " times");
-            System.out.println("Letter 'E' appears " + numE + " times");
-            System.out.println("Letter 'I' appears " + numI + " times");
-            System.out.println("Letter 'O' appears " + numO + " times");
-            System.out.println("Letter 'U' appears " + numU + " times");
-        } else if (type.equals("consonants")) {
-            input = text;
-            HashMap<String, Integer> consonants = new HashMap<>();
-            char[] chars = input.toCharArray();
-            for (int i = 0; i < chars.length; i++) {
-                if (chars[i] != 'a'
-                        && chars[i] != 'A'
-                        && chars[i] != 'e'
-                        && chars[i] != 'E'
-                        && chars[i] != 'i'
-                        && chars[i] != 'I'
-                        && chars[i] != 'o'
-                        && chars[i] != 'O'
-                        && chars[i] != 'u'
-                        && chars[i] != 'U'
-                ) {
-                    String stringCharacter = String.valueOf(chars[i]).toUpperCase();
-                    if (consonants.containsKey(stringCharacter)) {
-                        Integer num = consonants.get(stringCharacter);
-                        num++;
-                        consonants.put(stringCharacter, num);
-                    } else {
-                        consonants.put(stringCharacter, 1);
-                    }
-                }
-            }
-            consonants.entrySet().forEach(entrySet -> {
-                System.out.println("Letter '" + entrySet.getKey() + "' appears " + entrySet.getValue() + " times");
-            });
         }
+        return result;
     }
 }
