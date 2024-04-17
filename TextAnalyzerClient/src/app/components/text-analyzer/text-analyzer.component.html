@@ -1,17 +1,17 @@
 <form [formGroup]="textForm" (submit)="onSubmit()">
       <div class="row mt-5">
-        <div class="col-md-12">
-          <mat-form-field class="w-100">
-            <mat-label>Leave a text</mat-label>
-            <textarea formControlName="text" matInput placeholder="Ex. It makes me feel..." rows="10"></textarea>
-          </mat-form-field>
-        </div>
         <div class="col-md-12 text-center">
           <mat-radio-group formControlName="type">
             <mat-radio-button [value]="type.AllLetters">All Letters</mat-radio-button>
             <mat-radio-button [value]="type.Vowels">Only Vowels</mat-radio-button>
             <mat-radio-button [value]="type.Consonants">Only Consonants</mat-radio-button>
           </mat-radio-group>
+        </div>
+        <div class="col-md-12">
+          <mat-form-field class="w-100">
+            <mat-label>Leave a text</mat-label>
+            <textarea formControlName="text" matInput placeholder="Ex. It makes me feel..." rows="10"></textarea>
+          </mat-form-field>
         </div>
         <div class="col-md-12">
           <button mat-flat-button color="primary" class="w-100" type="submit">Analyze</button>
