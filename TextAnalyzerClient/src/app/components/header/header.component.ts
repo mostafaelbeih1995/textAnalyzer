@@ -22,6 +22,7 @@ export class HeaderComponent implements OnDestroy{
       this.isOnlineMode = res;
     });
   }
+  
   onChangeToggle(event: MatSlideToggleChange){
     this.textAnalyzerService.setState(event.checked);
   }

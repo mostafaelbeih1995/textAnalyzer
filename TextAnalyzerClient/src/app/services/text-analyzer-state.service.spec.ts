@@ -47,7 +47,6 @@ describe('TextAnalyzerStateService', () => {
     const req = http.expectOne(`${environment.apiUrl}`);
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual({text, type});
-    // req.flush(expectedOutput);
   }
 ));
 
