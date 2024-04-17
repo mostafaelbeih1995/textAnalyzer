@@ -21,14 +21,14 @@ describe('TextAnalyzerStateService', () => {
     http.verify();
   });
 
-  it('should analyze text offline mode positive scenario'), () => {
+  it('should analyze text offline mode positive scenario', () => {
     const text = 'mostafa';
     const type = AnalysisType.Vowels;
     const isOnlineMode = false;
     const expectedOutput = { o: 1, a: 2 };
 
     service.analyzeText(text, type, isOnlineMode).subscribe(result => expect(result).toEqual(expectedOutput));
-  }
+  });
 
   it('should analyze text online mode positive scenario', inject(
     [HttpTestingController, TextAnalyzerStateService],
@@ -47,6 +47,7 @@ describe('TextAnalyzerStateService', () => {
     const req = http.expectOne(`${environment.apiUrl}`);
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual({text, type});
+    req.flush(expectedOutput);
   }
 ));
 
