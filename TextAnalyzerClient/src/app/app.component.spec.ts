@@ -1,16 +1,24 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { TextAnalyzerStateService } from './services/text-analyzer-state.service';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
+import { TextAnalyzerComponent } from './components/text-analyzer/text-analyzer.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        AppComponent,
+       HeaderComponent,
+       TextAnalyzerComponent
       ],
       declarations: [
-        AppComponent
+        HttpClientTestingModule
       ],
+      providers:[
+        TextAnalyzerStateService
+      ]
     }).compileComponents();
   });
 

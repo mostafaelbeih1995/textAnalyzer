@@ -8,11 +8,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title: string = 'TextAnalyzer';
   isOnlineMode: boolean = false;
-
-  // toggleMode(isOnlineMode: boolean) {
-  //   console.log("app main " + isOnlineMode );
-  //   this.isOnlineMode = isOnlineMode;
-  // }
 }
 
 
