@@ -4,7 +4,6 @@ import com.Dedalus.TextAnalyzer.model.enums.AnalysisMode;
 import com.Dedalus.TextAnalyzer.model.enums.ModeValidCharacters;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

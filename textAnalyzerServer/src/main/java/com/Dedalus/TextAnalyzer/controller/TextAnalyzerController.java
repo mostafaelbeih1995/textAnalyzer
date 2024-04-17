@@ -19,7 +19,7 @@ public class TextAnalyzerController {
     private TextAnalyzerService textAnalyzerService;
 
     @PostMapping
-    public Map<Character, Integer>test(@Valid @RequestBody AnalyzeTextRequest request, BindingResult bindingResult){
+    public Map<Character, Integer>analyzeText(@Valid @RequestBody AnalyzeTextRequest request, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             throw new InvalidRequestException(bindingResult);
         }
