@@ -2,10 +2,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {HttpClient} from "@angular/common/http";
 import { TextAnalyzerStateService } from '../../services/text-analyzer-state.service';
-// import { AnalysisType} from '../../enums/AnalysisType';
-// import { TypeRelatedCharacter} from '../../enums/TypeRelatedCharacter';
-// import { environment } from '../../../environments/environment';
-// import { Observable, from, of } from 'rxjs';
 
 @Component({
   selector: 'app-text-analyzer',
@@ -15,7 +11,7 @@ import { TextAnalyzerStateService } from '../../services/text-analyzer-state.ser
 export class TextAnalyzerComponent implements OnInit{
   state: boolean = true;
   textForm!: FormGroup;
-  analyzeList: any[] = [];
+  analysisList: any[] = [];
   private textAnalyzerService = inject(TextAnalyzerStateService);
   private fb = inject(FormBuilder);
   private http = inject(HttpClient);
@@ -49,7 +45,7 @@ export class TextAnalyzerComponent implements OnInit{
         console.log('error');
         //handle error
        else
-        this.analyzeList.push(result);
+        this.analysisList.push(result);
     });;
   }
 }
