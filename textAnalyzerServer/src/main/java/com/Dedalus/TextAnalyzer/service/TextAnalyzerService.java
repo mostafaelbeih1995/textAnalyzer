@@ -10,7 +10,6 @@ import java.util.Map;
 @Service
 public class TextAnalyzerService {
     public Map<Character, Integer> analyzeText(String text, AnalysisMode type){
-
         Map<Character, Integer> result = new LinkedHashMap<>();
         String charactersToCheck = type.getType().equals("Vowels") ? ModeValidCharacters.VOWELS.getValidCharacters() :
                                     type.getType().equals("Consonants") ? ModeValidCharacters.CONSONANTS.getValidCharacters() :
