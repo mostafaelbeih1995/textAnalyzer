@@ -23,15 +23,6 @@ public class TextAnalyzerServiceTest {
         assertTrue(true);
     }
 
-    @Test
-    void positiveScenarioAllLetters(){
-        String text = "Banana";
-        AnalysisMode analysisMode = AnalysisMode.ALLLETTERS;
-        var result = textAnalyzerService.analyzeText(text, analysisMode);
-        assertEquals(1, result.get('b'));
-        assertEquals(3, result.get('a'));
-        assertEquals(2, result.get('n'));
-    }
 
     @Test
     void positiveScenarioVOWELS(){
@@ -44,7 +35,7 @@ public class TextAnalyzerServiceTest {
     @Test
     void positiveScenarioConsonants(){
         String text = "Banana";
-        AnalysisMode analysisMode = AnalysisMode.ALLLETTERS;
+        AnalysisMode analysisMode = AnalysisMode.CONSONANTS;
         var result = textAnalyzerService.analyzeText(text, analysisMode);
         assertEquals(1, result.get('b'));
         assertEquals(2, result.get('n'));
@@ -53,7 +44,7 @@ public class TextAnalyzerServiceTest {
     @Test
     void allSymbolsText(){
         String text = "!@#$%^&*()";
-        AnalysisMode analysisMode = AnalysisMode.ALLLETTERS;
+        AnalysisMode analysisMode = AnalysisMode.VOWELS;
         var result = textAnalyzerService.analyzeText(text, analysisMode);
         assertEquals(0, result.size());
     }
