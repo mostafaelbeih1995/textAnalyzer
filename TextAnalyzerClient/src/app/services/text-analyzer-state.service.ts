@@ -27,7 +27,7 @@ export class TextAnalyzerStateService {
       return of(this.analyzeTextOffline(text, type));
     }
     else{
-    return this.http.post<any>(environment.apiUrl, {text, type});
+      return this.http.post<any>(environment.apiUrl, {text, type});
     }
 
   }
