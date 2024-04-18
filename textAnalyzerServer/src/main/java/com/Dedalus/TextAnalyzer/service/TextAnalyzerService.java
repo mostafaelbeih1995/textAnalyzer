@@ -14,7 +14,7 @@ public class TextAnalyzerService {
         Map<Character, Integer> result = new LinkedHashMap<>();
         String charactersToCheck = type.getType().equals("Vowels") ? ModeValidCharacters.VOWELS.getValidCharacters() :
                                     type.getType().equals("Consonants") ? ModeValidCharacters.CONSONANTS.getValidCharacters() :
-                                            ModeValidCharacters.ALLLETTERS.getValidCharacters();
+                                            ModeValidCharacters.VOWELS.getValidCharacters();
 
         text = text.toLowerCase();
         for(char c: text.toCharArray()){

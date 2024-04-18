@@ -8,8 +8,6 @@ import lombok.Getter;
 public enum ModeValidCharacters {
 
     VOWELS("aeiou"),
-    CONSONANTS("bcdfghjklmnpqrstvwxyz"),
-
-    ALLLETTERS("abcdefghijklmnopqrstuvwxyz");
+    CONSONANTS("bcdfghjklmnpqrstvwxyz");
     private final String validCharacters;
 }

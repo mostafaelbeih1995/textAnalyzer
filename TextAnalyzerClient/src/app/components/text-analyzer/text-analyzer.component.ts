@@ -16,38 +16,39 @@ export class TextAnalyzerComponent implements OnInit, OnDestroy{
   analysisList: any[] = [];
   type = AnalysisType;
   stateSubscriber!: Subscription;
+  analyzeTextSybscriber!: Subscription;
   
   constructor(private textAnalyzerService: TextAnalyzerStateService, private fb: FormBuilder, private http: HttpClient){
   }
   ngOnInit(): void {
-    this.getState();
+    this.subscribeToStateChange();
     this.createForm();
   }
 
   createForm(): void {
     this.textForm = this.fb.group({
       text: [null, [Validators.required]],
-      type: [this.type.AllLetters, [Validators.required]],
+      type: [this.type.Vowels, [Validators.required]],
     })
   }
 
-  getState(): boolean {
-    this.textAnalyzerService.getState().subscribe(res => {
+  subscribeToStateChange(): void {
+    this.stateSubscriber = this.textAnalyzerService.getState().subscribe(res => {
       this.state = res;
-    })
-    return this.state;
+    });
   }
 
   onSubmit(): void {
     if (!this.textForm.valid) {
       return;
     }
-    this.textAnalyzerService.analyzeText(this.textForm.value['text'], this.textForm.value['type'], this.getState()).subscribe(result => {
-        this.analysisList.push(result);
-    });;
+    this.analyzeTextSybscriber =  this.textAnalyzerService.analyzeText(this.textForm.value['text'], this.textForm.value['type'], this.state).subscribe(result => {
+      this.analysisList.push(result);
+    });
   }
 
   ngOnDestroy() {
     this.stateSubscriber.unsubscribe();
+    this.analyzeTextSybscriber.unsubscribe();
   }
 }

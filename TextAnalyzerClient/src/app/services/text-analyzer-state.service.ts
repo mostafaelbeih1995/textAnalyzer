@@ -34,18 +34,17 @@ export class TextAnalyzerStateService {
 
   private analyzeTextOffline(text: string, type: AnalysisType): any{
     
-    let analysisMap = new Map<string, number>();
     const charactersToCheck = type === AnalysisType.Vowels ? TypeRelatedCharacter.Vowels :
                               type === AnalysisType.Consonants ? TypeRelatedCharacter.Consonants :
-                              TypeRelatedCharacter.AllLetters;
+                              TypeRelatedCharacter.Vowels;
 
-    text.toLowerCase().split('').forEach(char => {
-      if(charactersToCheck.includes(char)) {
-        let count = analysisMap.get(char) || 0;
-        count++;
-        analysisMap.set(char, count);
+     const result: {[key: string]: number} = {};
+    for(let i = 0; i < text.length; i++){
+      const character = text.charAt(i).toLowerCase();
+      if(charactersToCheck.includes(character)){
+        result[character] = (result[character] || 0) + 1;
       }
-    });
-    return Object.fromEntries(analysisMap);
+    }
+    return result;
   }
 }

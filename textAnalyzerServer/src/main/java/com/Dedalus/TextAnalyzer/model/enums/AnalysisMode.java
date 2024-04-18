@@ -8,8 +8,7 @@ import lombok.Getter;
 public enum AnalysisMode {
 
     VOWELS("Vowels"),
-    CONSONANTS("Consonants"),
-    ALLLETTERS("AllLetters");
+    CONSONANTS("Consonants");
 
     private final String type;
 }
